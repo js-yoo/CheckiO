@@ -1,4 +1,5 @@
 # https://py.checkio.org/en/mission/all-the-same/
+# Difficulty : Elementary
 
 from typing import List, Any
 
