@@ -1,5 +1,5 @@
 # https://py.checkio.org/en/mission/i-love-python/
-# Degree : Elementary
+# Difficulty : Elementary
 
 def i_love_python(degree:int):
     if degree==0: return "I hate Python !!!!!!"
