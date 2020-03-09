@@ -1,5 +1,5 @@
 # https://py.checkio.org/en/mission/feed-pigeons/
-# Degree : Simple
+# Difficulty : Simple
 
 def checkio(portions):
     fed = minute = pigeons = 0
