@@ -1,0 +1,107 @@
+# https://py.checkio.org/en/mission/striped-words/
+# Difficulty : Elementary
+
+# 1) Fail_code(have many errors)
+
+VOWELS = "AEIOUY"
+CONSONANTS = "BCDFGHJKLMNPQRSTVWXZ"
+exclusions = ",.?;"
+
+def checkio(text):
+    
+    for exclusion in exclusions:
+        text=text.replace(exclusion," ")
+    words=text.split()
+    
+    vword=[]
+    cword=[]
+    count=0
+    
+    for word in words:
+        
+        if len(word)%2!=0: 
+            continue 
+        
+        if len(word)==2:
+            
+            if word[0].upper() in VOWELS and word[1].upper() in CONSONANTS:
+                count+=1
+                words.remove(word)
+            elif word[0].upper() in CONSONANTS and word[1].upper() in VOWELS:
+                count+=1
+                words.remove(word)
+        
+    for word in words:
+        
+        if word[0].upper() in VOWELS and word[1].upper() in CONSONANTS:
+            vword.append(word)
+        elif word[0].upper() in CONSONANTS and word[1].upper() in VOWELS:
+            cword.append(word)
+        else: continue
+    
+    for v in vword:
+        
+        i=1
+        
+        while i <len(word):
+            
+            if word[i].upper() in VOWELS and word[i+1].upper() in CONSONANTS:
+                count+=1
+            i+=1
+            
+    for cc in cword:
+        
+        i=1
+        
+        while i <len(word):    
+            
+            if word[i].upper() in CONSONANTS and word[i+1].upper() in VOWELS:
+                count+=1
+            i+=1
+            
+    return count
+    
+# 2) Others
+VOWELS = "AEIOUY"
+CONSONANTS = "BCDFGHJKLMNPQRSTVWXZ"
+exclusions = ",.?;"
+
+def checkio(text):
+    result=0
+    
+    # Splitting text
+    for exclusion in exclusions:
+        text=text.replace(exclusion," ")
+    words=text.split()
+    
+    # Checking each word
+    for word in words:
+        if len(word)<2: continue
+        i=0
+        while i < len(word)-1:
+            if VOWELS.count(word[i].upper())==0 and CONSONANTS.count(word[i].upper())==0 or\
+                            VOWELS.count(word[i].upper())==VOWELS.count(word[i+1].upper()) or\
+                            CONSONANTS.count(word[i].upper())==CONSONANTS.count(word[i+1].upper()):
+                i=len(word)
+            i+=1
+            if i==len(word)-1:
+                result+=1
+    
+    return result       
+
+# 3) BEST_CODE
+VOWELS = "AEIOUY"
+CONSONANTS = "BCDFGHJKLMNPQRSTVWXZ"
+
+def checkio(text):
+    text="".join(c.upper() if c not in " !?,." else " " for c in text)
+    words=[word for word in text.split() if len(word)>1 and word.isalpha()]
+    words=["".join("V" if c in VOWELS else "C" for c in word) for word in words]
+    words=[word for word in words if not("VV" in word or "CC" in word)]
+    return len(words)
+
+# Example)
+# checkio("My name is ...") == 3
+# checkio("Hello world") == 0
+# checkio("A quantity of striped words.") == 1, "Only of"
+# checkio("Dog,cat,mouse,bird.Human.") == 3
